@@ -1,14 +1,14 @@
 {
     "development": {
-      "username": "root",
-      "password": "238732",
+      "username": "appUser",
+      "password": "appUser@123",
       "database": "quotes_db",
       "host": "127.0.0.1",
       "dialect": "mysql"
     },
     "production": {
-      "username": "root",
-      "password": "238732",
+      "username": "appUser",
+      "password": "appUser@123",
       "database": "quotes_db",
       "host": "127.0.0.1",
       "dialect": "mysql"

@@ -1,14 +1,15 @@
 {
-  "name": "account",
+  "name": "quotes-app",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "http://codesoft.sd:10080/fleet/account.git"
+    "url": "https://github.com/mohammed2571994/quotes-backend.git"
   },
   "author": "Mohamed",
   "license": "ISC",
