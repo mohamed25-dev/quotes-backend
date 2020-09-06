@@ -7,6 +7,12 @@ const {checkPermission} = require('../middleware/checkPermission');
 //Get all Quotes
 router.get('/quotes', quote.list);
 
+//Get all Quotes By an Author
+router.get('/quotes/author/:authorId', quote.listByAuthor);
+
+//Get all Quotes By a Category
+router.get('/quotes/category/:categoryId', quote.listByCategory);
+
 //Create Quote
 router.post('/quotes', auth, checkPermission('accounts'), quote.create);
 
