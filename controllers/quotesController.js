@@ -49,6 +49,36 @@ exports.list = async (req, res) => {
     setResponse(res, 200, 'quotes', { quotes });
 };
 
+//Get Quotes for an author 
+exports.listByAuthor = async (req, res) => {
+  const quotes = await Quote.findAll({
+      where: {
+        authorId: req.params.authorId
+      },
+      include: include
+  });
+
+  setTimeout( () => {
+    console.log('Waiting for nothing');
+  }, 2000)
+  setResponse(res, 200, 'quotes', { quotes });
+};
+
+//Get Quotes By a Category 
+exports.listByCategory = async (req, res) => {
+  const quotes = await Quote.findAll({
+      where: {
+        categoryId: req.params.categoryId
+      },
+      include: include
+  });
+
+  setTimeout( () => {
+    console.log('Waiting for nothing');
+  }, 2000)
+  setResponse(res, 200, 'quotes', { quotes });
+};
+
 //Get quote 
 exports.get = async (req, res) => {
     let quote = await Quote.findByPk(req.params.quoteId, {
