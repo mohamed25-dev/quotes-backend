@@ -8,6 +8,7 @@ const users  = require('../routes/users');
 const roles  = require('../routes/roles');
 const quotes = require('../routes/quotes');
 const authors = require('../routes/authors');
+const categories = require('../routes/categories');
 const permissions  = require('../routes/permissions');
 const authenticate = require('../routes/authenticate');
 const publicPath = path.join(__dirname, '..', './public');
@@ -39,6 +40,7 @@ module.exports = function (app) {
     app.use(authenticate);
     app.use(quotes);
     app.use(authors);
+    app.use(categories);
     app.use(error);
 
     app.use('/', (req, res) => {

@@ -58,9 +58,6 @@ exports.listByAuthor = async (req, res) => {
       include: include
   });
 
-  setTimeout( () => {
-    console.log('Waiting for nothing');
-  }, 2000)
   setResponse(res, 200, 'quotes', { quotes });
 };
 
@@ -73,9 +70,6 @@ exports.listByCategory = async (req, res) => {
       include: include
   });
 
-  setTimeout( () => {
-    console.log('Waiting for nothing');
-  }, 2000)
   setResponse(res, 200, 'quotes', { quotes });
 };
 
