@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
         autoIncrement: true
       },
       quote: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.TEXT,
         allowNull: false
       },
       categoryId: {
