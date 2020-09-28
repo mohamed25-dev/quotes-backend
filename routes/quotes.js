@@ -3,9 +3,11 @@ const router  = new express.Router();
 const auth    = require('../middleware/auth');
 const quote    = require('../controllers/quotesController');
 const {checkPermission} = require('../middleware/checkPermission');
+const { getQuotes } = require('../controllers/quote/index');
+const makeCallback = require('../helper/express-callback');
 
 //Get all Quotes
-router.get('/quotes', quote.list);
+router.get('/quotes', makeCallback(getQuotes));
 
 //Get all Quotes By an Author
 router.get('/quotes/author/:authorId', quote.listByAuthor);

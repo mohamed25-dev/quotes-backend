@@ -1,1 +1,1 @@
-module.exports = { timestamps: false }
+module.exports = { timestamps: true }

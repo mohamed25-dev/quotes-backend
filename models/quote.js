@@ -19,10 +19,17 @@ module.exports = function(sequelize, DataTypes) {
       authorId: {
         type: DataTypes.INTEGER(11),
         allowNull: false
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
       }
     }, {
-      tableName: 'quotes',
-      timestamps: false
+      tableName: 'quotes'
     });
   
     Quote.associate = function (models) {

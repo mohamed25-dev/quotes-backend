@@ -1,4 +1,4 @@
-const QuotesDb  = require('../db/index')
+const QuotesDb  = require('../../data-access/quote/index')
 const makeListQuotes = require('./list-quotes');
 const makeAddQuote = require('./add-quote');
 
@@ -11,9 +11,11 @@ const listQuotes = makeListQuotes(QuotesDb);
 //   categoryId: 1
 // }).then(data => console.log(data));
 
-listQuotes(2).then(data => console.log(data));
+// listQuotes(2).then(data => console.log(data));
 
 const quoteServices = Object.freeze({
   listQuotes,
   addQuote
 });
+
+module.exports = quoteServices;

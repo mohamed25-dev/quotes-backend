@@ -1,4 +1,4 @@
-const makeQuote = require('../quote');
+const makeQuote = require('../../entities/quote/quote');
 const makeAddQuote = function ( quotesDb ) {
   return async function addQuote (quoteInfo) {
     let quote = makeQuote(quoteInfo);
