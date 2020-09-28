@@ -1,3 +1,3 @@
 const makeQuote = require('./quote');
 
-export default makeQuote;
+module.exports = makeQuote;

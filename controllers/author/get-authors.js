@@ -1,17 +1,16 @@
-const makeGetQuotes = function(listQuotes) {
+const makeGetAuthors = function(listAuthors) {
   return async function getComments(httpRequest) {
     const headers = {
       'Content-Type': 'application/json'
     }
 
     try {
-      let authorId = httpRequest.params.authorId;
-      const quotes = await listQuotes(authorId);
+      const authors = await listAuthors();
 
       return {
         headers,
         statusCode: 200,
-        body: quotes
+        body: authors
       }
 
     } catch (e) {
@@ -26,4 +25,4 @@ const makeGetQuotes = function(listQuotes) {
   }
 }
 
-module.exports = makeGetQuotes;
+module.exports = makeGetAuthors;

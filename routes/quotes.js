@@ -10,7 +10,7 @@ const makeCallback = require('../helper/express-callback');
 router.get('/quotes', makeCallback(getQuotes));
 
 //Get all Quotes By an Author
-router.get('/quotes/author/:authorId', quote.listByAuthor);
+router.get('/quotes/author/:authorId', makeCallback(getQuotes));
 
 //Get all Quotes By a Category
 router.get('/quotes/category/:categoryId', quote.listByCategory);
