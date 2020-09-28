@@ -5,7 +5,7 @@ const makePostAuthor = function(addAuthor) {
     }
 
     try {
-      let authorInfo = httpRequest.body.author;
+      let authorInfo = httpRequest.body;
       const author = await addAuthor(authorInfo);
 
       return {

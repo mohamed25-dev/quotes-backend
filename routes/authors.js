@@ -10,7 +10,7 @@ const { getAuthors, postAuthor } = require('../controllers/author/index');
 router.get('/authors', makeCallback(getAuthors));
 
 //Create Author
-router.post('/authors', auth, checkPermission('accounts'), author.create);
+router.post('/authors', makeCallback(postAuthor));
 
 //Update Author
 router.patch('/authors/:authorId', auth, checkPermission('accounts'), author.update)
