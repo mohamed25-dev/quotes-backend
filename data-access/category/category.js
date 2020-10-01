@@ -7,9 +7,32 @@ const makeCategoriesDb = function (CateogryDb) {
     return CateogryDb.create(quote);
   }
 
+  async function update(categoryId, updatedCategory) {
+    return CateogryDb.update(updatedCategory, {
+      where: {
+        categoryId
+      }
+    });
+  }
+
+  async function remove(categoryId) {
+    return CateogryDb.destroy({
+      where: {
+        categoryId
+      }
+    });
+  }
+
+  async function findById(categoryId) {
+    return CateogryDb.findByPk(categoryId);
+  }
+
   return Object.freeze({
     findAll,
-    insert
+    findById,
+    insert,
+    update,
+    remove
   });
 }
 

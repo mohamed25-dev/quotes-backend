@@ -1,9 +1,9 @@
 const makeCategory = require('../../entities/category/index');
-const makeAddCategory = function ( categoriesDb ) {
+const makeAddCategory = function ( dataAccess ) {
   return async function addCategory (categoryInfo) {
     let category = makeCategory(categoryInfo);
     
-    return categoriesDb.insert({
+    return dataAccess.insert({
       categoryName: category.getCategoryName(),
       categoryImage: category.getCategoryImage(),
       isEnabled: category.getIsEnabled(),

@@ -1,6 +1,6 @@
-const makeListCategories = function ( categoriesDb ) {
+const makeListCategories = function ( makeRemoveCategory ) {
   return async function lisCategories () {
-    return categoriesDb.findAll();
+    return makeRemoveCategory.findAll();
   }
 }
 
