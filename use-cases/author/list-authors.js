@@ -1,5 +1,5 @@
 const makeListAuthors = function ( authorsDb ) {
-  return async function listQuotes () {
+  return async function listAuthors () {
     return authorsDb.findAll();
   }
 }
