@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING(255),
         allowNull: false
       },
-      image: {
+      authorImage: {
         type: DataTypes.STRING(255),
         allowNull: false
       },

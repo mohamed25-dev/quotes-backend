@@ -1,6 +1,6 @@
 const makeAuthor = function ({
   fullName,
-  image,
+  authorImage,
   isEnabled = true,
   createdAt = Date.now(),
   updatedAt = Date.now()
@@ -11,7 +11,7 @@ const makeAuthor = function ({
 
   return Object.freeze ({
       getFullName: () => fullName,
-      getImage: () => image,
+      getAuthorImage: () => authorImage,
       getIsEnabled: () => isEnabled,
       getCreatedAt: () => createdAt,
       getUpdatedAt: () => updatedAt
