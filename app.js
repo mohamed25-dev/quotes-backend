@@ -8,7 +8,6 @@ const app  = express();
 //startup
 const logger = require('./startup/logging');
 require('./startup/routes')(app);
-require('./startup/db');
 
 
 app.listen(port, '0.0.0.0',() => {
