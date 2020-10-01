@@ -1,5 +1,5 @@
 const makeGetAuthors = function(listAuthors) {
-  return async function getComments(httpRequest) {
+  return async function getAuthors(httpRequest) {
     const headers = {
       'Content-Type': 'application/json'
     }

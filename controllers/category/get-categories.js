@@ -1,18 +1,17 @@
-const makePostAuthor = function(addAuthor) {
-  return async function postAuthor(httpRequest) {
+const makeGetCategories = function(listCategories) {
+  return async function getCategories(httpRequest) {
     const headers = {
       'Content-Type': 'application/json'
     }
 
     try {
-      let authorInfo = httpRequest.body;
-      let author = await addAuthor(authorInfo);
-
+      const categories = await listCategories();
       return {
         headers,
-        statusCode: 201,
-        body: author
+        statusCode: 200,
+        body: categories
       }
+
     } catch (e) {
       return {
         headers,
@@ -25,4 +24,4 @@ const makePostAuthor = function(addAuthor) {
   }
 }
 
-module.exports = makePostAuthor;
+module.exports = makeGetCategories;

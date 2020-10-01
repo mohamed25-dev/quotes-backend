@@ -1,12 +1,12 @@
 const makeGetQuotes = function(listQuotes) {
-  return async function getComments(httpRequest) {
+  return async function getQuotes(httpRequest) {
     const headers = {
       'Content-Type': 'application/json'
     }
 
     try {
       let authorId = httpRequest.params.authorId;
-      const quotes = await listQuotes(authorId);
+      let quotes = await listQuotes(authorId);
 
       return {
         headers,

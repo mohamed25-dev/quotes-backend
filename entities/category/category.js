@@ -1,4 +1,4 @@
-const makeAuthor = function ({
+const makeCategory = function ({
   categoryName,
   categoryImage,
   isEnabled = true,
@@ -18,4 +18,4 @@ const makeAuthor = function ({
   });
 }
 
-module.exports = makeAuthor;
+module.exports = makeCategory;
