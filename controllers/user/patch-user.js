@@ -1,20 +1,20 @@
-const makePatchQuote = function(editQuote) {
-  return async function patchQuote(httpRequest) {
+const makePatchUser = function(editUser) {
+  return async function patchUser(httpRequest) {
     const headers = {
       'Content-Type': 'application/json'
     }
 
     try {
-      let updatedQuoteInfo = httpRequest.body;
-      let quoteId = httpRequest.params.quoteId;
+      let updatedUserInfo = httpRequest.body;
+      let userId = httpRequest.params.userId;
 
-      let quote = await editQuote(quoteId, updatedQuoteInfo);
+      let user = await editUser(userId, updatedUserInfo);
 
       return {
         headers,
         statusCode: 200,
         body: {
-          quote
+          user
         }
       }
     } catch (e) {
@@ -29,4 +29,4 @@ const makePatchQuote = function(editQuote) {
   }
 }
 
-module.exports = makePatchQuote;
+module.exports = makePatchUser;

@@ -3,9 +3,11 @@ const router  = new express.Router();
 const auth    = require('../middleware/auth');
 const role    = require('../controllers/roleController');
 const {checkPermission} = require('../middleware/checkPermission');
+const { getRoles } = require('../controllers/role/index');
+const makeCallback = require('../helper/express-callback');
 
 //Get all Roles
-router.get('/roles', auth, checkPermission('accounts'), role.list);
+router.get('/roles', makeCallback(getRoles));
 
 //Create Role
 router.post('/roles', auth, checkPermission('accounts'), role.create);

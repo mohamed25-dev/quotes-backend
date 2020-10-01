@@ -1,16 +1,17 @@
-const makeDeleteQuote = function(removeQuote) {
-  return async function deleteQuote(httpRequest) {
+const makeGetRoles = function(listRoles) {
+  return async function getRoles(httpRequest) {
     const headers = {
       'Content-Type': 'application/json'
     }
 
     try {
-      let quoteId = httpRequest.params.quoteId;
-      await removeQuote(quoteId);
+      let authorId = httpRequest.params.authorId;
+      let roles = await listRoles(authorId);
+
       return {
         headers,
         statusCode: 200,
-        body: {}
+        body: roles
       }
 
     } catch (e) {
@@ -25,4 +26,4 @@ const makeDeleteQuote = function(removeQuote) {
   }
 }
 
-module.exports = makeDeleteQuote;
+module.exports = makeGetRoles;

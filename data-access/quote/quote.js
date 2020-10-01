@@ -7,9 +7,32 @@ const makeQuotesDb = function (QuoteDb) {
     return QuoteDb.create(quote);
   }
 
+  async function update(quoteId, updatedQuote) {
+    return QuoteDb.update(updatedQuote, {
+      where: {
+        quoteId
+      }
+    });
+  }
+
+  async function remove(quoteId) {
+    return QuoteDb.destroy({
+      where: {
+        quoteId
+      }
+    });
+  }
+
+  async function findById(quoteId) {
+    return QuoteDb.findByPk(quoteId);
+  }
+  
   return Object.freeze({
     findAll,
-    insert
+    insert,
+    update,
+    remove,
+    findById
   });
 }
 

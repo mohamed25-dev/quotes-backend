@@ -1,18 +1,18 @@
-const makeDeleteQuote = function(removeQuote) {
-  return async function deleteQuote(httpRequest) {
+const makePostUser = function(addUser) {
+  return async function postUser(httpRequest) {
     const headers = {
       'Content-Type': 'application/json'
     }
 
     try {
-      let quoteId = httpRequest.params.quoteId;
-      await removeQuote(quoteId);
+      let userInfo = httpRequest.body.user;
+      const user = await addUser(userInfo);
+
       return {
         headers,
-        statusCode: 200,
-        body: {}
+        statusCode: 201,
+        body: user
       }
-
     } catch (e) {
       return {
         headers,
@@ -25,4 +25,4 @@ const makeDeleteQuote = function(removeQuote) {
   }
 }
 
-module.exports = makeDeleteQuote;
+module.exports = makePostUser;

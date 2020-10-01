@@ -1,9 +1,15 @@
 const QuotesDb  = require('../../data-access/quote/index')
 const makeListQuotes = require('./list-quotes');
 const makeAddQuote = require('./add-quote');
+const makeEditQuote = require('./edit-quote');
+const makeRemoveQuote = require('./remove-quote');
 
-const addQuote   = makeAddQuote(QuotesDb);
-const listQuotes = makeListQuotes(QuotesDb);
+
+const addQuote    = makeAddQuote(QuotesDb);
+const listQuotes  = makeListQuotes(QuotesDb);
+const editQuote   = makeEditQuote(QuotesDb);
+const removeQuote = makeRemoveQuote(QuotesDb);
+
 
 // addQuote({
 //   quote: 'This is the most amazing quote',
@@ -15,7 +21,9 @@ const listQuotes = makeListQuotes(QuotesDb);
 
 const quoteServices = Object.freeze({
   listQuotes,
-  addQuote
+  addQuote,
+  editQuote,
+  removeQuote
 });
 
 module.exports = quoteServices;

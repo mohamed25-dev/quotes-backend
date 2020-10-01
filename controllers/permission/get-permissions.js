@@ -1,16 +1,17 @@
-const makeDeleteQuote = function(removeQuote) {
-  return async function deleteQuote(httpRequest) {
+const makeGetPermissions = function(listPermissions) {
+  return async function getPermissions(httpRequest) {
     const headers = {
       'Content-Type': 'application/json'
     }
 
     try {
-      let quoteId = httpRequest.params.quoteId;
-      await removeQuote(quoteId);
+      let permissionId = httpRequest.params.permissionId;
+      let permissions = await listPermissions(permissionId);
+
       return {
         headers,
         statusCode: 200,
-        body: {}
+        body: permissions
       }
 
     } catch (e) {
@@ -25,4 +26,4 @@ const makeDeleteQuote = function(removeQuote) {
   }
 }
 
-module.exports = makeDeleteQuote;
+module.exports = makeGetPermissions;

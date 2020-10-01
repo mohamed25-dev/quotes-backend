@@ -3,13 +3,36 @@ const makeAuthorsDb = function (AuthorDb) {
     return AuthorDb.findAll(options);
   }
   
-  async function insert(quote) {
-    return AuthorDb.create(quote);
+  async function insert(author) {
+    return AuthorDb.create(author);
   }
 
+  async function update(authorId, updatedAuthor) {
+    return AuthorDb.update(updatedAuthor, {
+      where: {
+        authorId
+      }
+    });
+  }
+
+  async function remove(authorId) {
+    return AuthorDb.destroy({
+      where: {
+        authorId
+      }
+    });
+  }
+
+  async function findById(authorId) {
+    return AuthorDb.findByPk(authorId);
+  }
+  
   return Object.freeze({
     findAll,
-    insert
+    insert,
+    update,
+    remove,
+    findById
   });
 }
 

@@ -13,10 +13,11 @@ const makePatchCategory = function(editCategory) {
       return {
         headers,
         statusCode: 200,
-        body: {category}
+        body: {
+          category
+        }
       }
     } catch (e) {
-      console.log(e);
       return {
         headers,
         statusCode: 500,

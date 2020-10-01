@@ -5,7 +5,8 @@ const makeDeleteCategory = function(removeCategory) {
     }
 
     try {
-      await removeCategory();
+      let categoryId = httpRequest.params.categoryId;
+      await removeCategory(categoryId);
       return {
         headers,
         statusCode: 200,

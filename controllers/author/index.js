@@ -1,10 +1,16 @@
-const { listAuthors, addAuthor } = require('../../use-cases/author/index');
+const { listAuthors, addAuthor, editAuthor, removeAuthor } = require('../../use-cases/author/index');
 
 const makeGetAuthors = require('./get-authors');
 const makePostAuthor = require('./post-author');
+const makePatchAuthor = require('./patch-author');
+const makeDeleteAuthor = require('./delete-author');
+
 
 const getAuthors = makeGetAuthors(listAuthors);
 const postAuthor = makePostAuthor(addAuthor);
+const patchAuthor = makePatchAuthor(editAuthor);
+const deleteAuthor = makeDeleteAuthor(removeAuthor);
+
 
 // let httpRequest = {};
 // httpRequest.query = {
@@ -28,7 +34,9 @@ const postAuthor = makePostAuthor(addAuthor);
 
 const authorController = Object.freeze({
   getAuthors,
-  postAuthor
+  postAuthor,
+  patchAuthor,
+  deleteAuthor
 });
 
 module.exports = authorController;

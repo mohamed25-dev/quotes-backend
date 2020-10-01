@@ -1,10 +1,16 @@
-const { listQuotes, addQuote } = require('../../use-cases/quote/index');
+const { listQuotes, addQuote, editQuote, removeQuote } = require('../../use-cases/quote/index');
 
 const makeGetQuotes = require('./get-quotes');
 const makePostQuote = require('./post-quote');
+const makePatchQuote = require('./patch-quote');
+const makeDeleteQuote = require('./delete-quote');
+
 
 const getQuotes = makeGetQuotes(listQuotes);
 const postQuote = makePostQuote(addQuote);
+const patchQuote = makePatchQuote(editQuote);
+const deleteQuote = makeDeleteQuote(removeQuote);
+
 
 // let httpRequest = {};
 // httpRequest.query = {
@@ -28,7 +34,9 @@ const postQuote = makePostQuote(addQuote);
 
 const quoteController = Object.freeze({
   getQuotes,
-  postQuote
+  postQuote,
+  patchQuote,
+  deleteQuote
 });
 
 module.exports = quoteController;
