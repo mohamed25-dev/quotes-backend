@@ -1,26 +1,12 @@
-const makePostAuthor = function(addAuthor) {
+const makePostAuthor = function (addAuthor) {
   return async function postAuthor(httpRequest) {
-    const headers = {
-      'Content-Type': 'application/json'
-    }
+    
+    let authorInfo = httpRequest.body;
+    let author = await addAuthor(authorInfo);
 
-    try {
-      let authorInfo = httpRequest.body;
-      let author = await addAuthor(authorInfo);
-
-      return {
-        headers,
-        statusCode: 201,
-        body: author
-      }
-    } catch (e) {
-      return {
-        headers,
-        statusCode: 500,
-        body: {
-          error: e.message
-        }
-      }
+    return {
+      code: 201,
+      body: { author }
     }
   }
 }

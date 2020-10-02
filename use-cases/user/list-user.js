@@ -1,6 +1,6 @@
-const makeListUsers = function ( usersDb ) {
+const makeListUsers = function ( dataAccess ) {
   return async function listUsers () {
-    return usersDb.findAll();
+    return dataAccess.findAll();
   }
 }
 

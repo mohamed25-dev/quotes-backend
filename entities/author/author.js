@@ -1,4 +1,5 @@
-const makeAuthor = function ({
+const buildMakeAuthor = (AppExceptions) => {
+return function makeAuthor ({
   fullName,
   authorImage,
   isEnabled = true,
@@ -6,16 +7,21 @@ const makeAuthor = function ({
   updatedAt = Date.now()
 } = {}) {
   if (!fullName || fullName.length < 3) {
-      throw new Error('full name must be valid');
+    throw new AppExceptions.InvalidInputException('fullName should be more than three characters');
   }
 
-  return Object.freeze ({
-      getFullName: () => fullName,
-      getAuthorImage: () => authorImage,
-      getIsEnabled: () => isEnabled,
-      getCreatedAt: () => createdAt,
-      getUpdatedAt: () => updatedAt
+  if (!authorImage) {
+    throw new AppExceptions.InvalidInputException('authorImage is required');
+  }
+  
+  return Object.freeze({
+    getFullName: () => fullName,
+    getAuthorImage: () => authorImage,
+    getIsEnabled: () => isEnabled,
+    getCreatedAt: () => createdAt,
+    getUpdatedAt: () => updatedAt
   });
 }
+}
 
-module.exports = makeAuthor;
+module.exports = buildMakeAuthor;

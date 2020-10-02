@@ -19,13 +19,13 @@ router.get('/quotes/category/:categoryId', quote.listByCategory);
 router.post('/quotes', auth, checkPermission('accounts'), makeCallback(postQuote));
 
 //Update Quote
-router.patch('/quotes/:quoteId', makeCallback(patchQuote));
+router.patch('/quotes/:quoteId', auth, checkPermission('accounts'), makeCallback(patchQuote));
 
 //Get Quote 
 router.get('/quotes/:quoteId', auth, checkPermission('accounts'), quote.get);
 
 //Delete Quote 
-router.delete('/quotes/:quoteId', makeCallback(deleteQuote));
+router.delete('/quotes/:quoteId', auth, checkPermission('accounts'), makeCallback(deleteQuote));
 
 
 module.exports = router;

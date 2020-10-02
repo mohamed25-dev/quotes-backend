@@ -41,7 +41,7 @@ module.exports = function (app) {
     app.use(quotes);
     app.use(authors);
     app.use(categories);
-    app.use(error);
+    // app.use(error);
 
     app.use('/', (req, res) => {
         res.status(404).send('Invalid URL, API Not found');

@@ -1,3 +1,5 @@
+const httpResponseWrapper = require('../common/response');
+
 const makeExpressCallback = function (controller) {
   return async (req, res) => {
     let httpRequest = {
@@ -12,15 +14,11 @@ const makeExpressCallback = function (controller) {
 
     try {
       let httpResponse = await controller(httpRequest);
-      if (httpResponse.headers) {
-        res.set(httpResponse.headers);
-      }
+      httpResponseWrapper.success(res, httpResponse);
 
-      res.type('json');
-      res.status(httpResponse.statusCode).send(httpResponse.body);
-      
     } catch (error) {
-      res.status(500).send({ error: error.message });
+      // res.status(500).send({ error: error.message });
+      httpResponseWrapper.error(res, error);
     }
   }
 }

@@ -10,13 +10,14 @@ const { getAuthors, postAuthor, patchAuthor, deleteAuthor } = require('../contro
 router.get('/authors', makeCallback(getAuthors));
 
 //Create Author
-router.post('/authors', makeCallback(postAuthor));
+router.post('/authors', auth, checkPermission('accounts'), makeCallback(postAuthor));
+
 
 //Update Author
-router.patch('/authors/:authorId', makeCallback(patchAuthor))
+router.patch('/authors/:authorId', auth, checkPermission('accounts'), makeCallback(patchAuthor))
 
 //Get Author 
-router.get('/authors/:authorId', auth, checkPermission('accounts'), author.get);
+router.get('/authors/:authorId', makeCallback(getAuthors));
 
 //Delete Author 
 router.delete('/authors/:authorId', makeCallback(deleteAuthor));

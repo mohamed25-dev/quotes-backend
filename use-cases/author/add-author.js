@@ -5,7 +5,7 @@ const makeAddAuthor = function ( authorsDb ) {
     
     return authorsDb.insert({
       fullName: author.getFullName(),
-      image: author.getAuthorImage(),
+      authorImage: author.getAuthorImage(),
       isEnabled: author.getIsEnabled(),
       createdAt: author.getCreatedAt(),
       updatedAt: author.getUpdatedAt()
