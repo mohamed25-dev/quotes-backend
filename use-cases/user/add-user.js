@@ -1,8 +1,8 @@
 const makeUser = require('../../entities/user/index');
 const makeAddUser = function ( usersDb ) {
   return async function addUser (userInfo) {
-    let user = makeUser(userInfo);
-    
+    let user = await makeUser(userInfo);
+    console.log(user.getPassword(), user.getFullName())
     return usersDb.insert({
       phoneNumber: user.getPhoneNumber(),
       username: user.getUsername(),

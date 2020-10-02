@@ -1,10 +1,10 @@
-const makeUser = function ({
+const buildMakeUser = function (hash) { 
+return async function makeUser ({
     username,
     phoneNumber,
     password,
     type,
     fullName,
-    authorImage,
     isEnabled = true,
     createdAt = Date.now(),
     updatedAt = Date.now()
@@ -14,7 +14,9 @@ const makeUser = function ({
     }
 
     //TODO: More validation
-    //TODO: Hash the password
+    if (password) {
+      password = await hash(password);
+    }
   
     return Object.freeze ({
         getUsername: () => username,
@@ -22,11 +24,10 @@ const makeUser = function ({
         getPassword: () => password,
         getType: () => type,
         getFullName: () => fullName,
-        getAuthorImage: () => authorImage,
         getIsEnabled: () => isEnabled,
         getCreatedAt: () => createdAt,
         getUpdatedAt: () => updatedAt
     });
   }
-  
-  module.exports = makeUser;
+}
+  module.exports = buildMakeUser;
