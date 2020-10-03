@@ -4,7 +4,6 @@ const makeGetPermissions = function (listPermissions) {
     let permissions = await listPermissions(permissionId);
 
     return {
-      headers,
       statusCode: 200,
       body: { permissions }
     }

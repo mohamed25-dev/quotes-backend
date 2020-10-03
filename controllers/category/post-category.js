@@ -1,28 +1,15 @@
-const makePostCategory = function(addCategory) {
+const makePostCategory = function (addCategory) {
   return async function postCategory(httpRequest) {
-    const headers = {
-      'Content-Type': 'application/json'
+
+    let categoryInfo = httpRequest.body.category;
+    let category = await addCategory(categoryInfo);
+
+    return {
+      headers,
+      statusCode: 201,
+      body: { category }
     }
 
-    try {
-      let categoryInfo = httpRequest.body.category;
-      console.log('info ', categoryInfo)
-      let category = await addCategory(categoryInfo);
-
-      return {
-        headers,
-        statusCode: 201,
-        body: category
-      }
-    } catch (e) {
-      return {
-        headers,
-        statusCode: 500,
-        body: {
-          error: e.message
-        }
-      }
-    }
   }
 }
 

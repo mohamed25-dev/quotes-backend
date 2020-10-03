@@ -1,27 +1,11 @@
-const makeGetUsers = function(listUsers) {
+const makeGetUsers = function (listUsers) {
   return async function getUsers(httpRequest) {
-    const headers = {
-      'Content-Type': 'application/json'
-    }
+    let userId = httpRequest.params.userId;
+    let users = await listUsers(userId);
 
-    try {
-      let userId = httpRequest.params.userId;
-      let users = await listUsers(userId);
-
-      return {
-        headers,
-        statusCode: 200,
-        body: users
-      }
-
-    } catch (e) {
-      return {
-        headers,
-        statusCode: 500,
-        body: {
-          error: e.message
-        }
-      }
+    return {
+      statusCode: 200,
+      body: users
     }
   }
 }
