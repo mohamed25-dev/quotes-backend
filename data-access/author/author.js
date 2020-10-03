@@ -1,4 +1,6 @@
-const makeAuthorsDb = function (AuthorDb) {
+const authorsDb = require(".");
+
+const makeAuthorsDb = function (AuthorDb, Op) {
   async function findAll(options) {
     return AuthorDb.findAll(options);
   }
@@ -26,13 +28,34 @@ const makeAuthorsDb = function (AuthorDb) {
   async function findById(authorId) {
     return AuthorDb.findByPk(authorId);
   }
+
+  async function findByFullName(fullName) {
+    return AuthorDb.findOne({
+      where: {
+        fullName
+      }
+    });
+  }
+
+  async function findByFullNameExceptId(fullName, authorId) {
+    return AuthorDb.findOne({
+      where: {
+        fullName,
+        authorId: {
+          [Op.ne]: authorId
+        }
+      }
+    });
+  }
   
   return Object.freeze({
     findAll,
     insert,
     update,
     remove,
-    findById
+    findById,
+    findByAuthorName: findByFullName,
+    findByFullNameExceptId
   });
 }
 

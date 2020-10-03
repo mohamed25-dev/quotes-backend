@@ -1,22 +1,26 @@
-const makeEditAuthor = function ( dataAccess ) {
+const makeEditAuthor = function ( DataAccess, AppExceptions ) {
   return async function editAuthor (authorId, updatedAuthor) {
 
-    //Check if author exist
-    let author = await dataAccess.findById(authorId);
+    let author = await DataAccess.findById(authorId);
     if (!author) {
-      throw new Error('Author not found'); 
+      throw new AppExceptions.NotFoundException('Author not found'); 
     }
 
-    //Validate the input
     if (updatedAuthor.fullName) {
       if (updatedAuthor.fullName.length < 3) {
-        throw new Error('fullName must be valid');
+        throw new AppExceptions.InvalidInputException('fullName should be more than three characters');
+      }
+
+      let result = await DataAccess.findByFullNameExceptId(updatedAuthor.fullName, authorId);
+      if (result) {
+        throw new AppExceptions.InvalidInputException('Author with the same name already exist');
       }
     }
 
     //Update it
-    await dataAccess.update(authorId, updatedAuthor);
-    return dataAccess.findById(authorId);
+    await DataAccess.update(authorId, updatedAuthor);
+
+    return DataAccess.findById(authorId);
   }
 }
 

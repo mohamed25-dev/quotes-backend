@@ -1,6 +1,6 @@
-const makeListAuthors = function ( authorsDb ) {
+const makeListAuthors = function ( DataAccess ) {
   return async function listAuthors () {
-    return authorsDb.findAll();
+    return DataAccess.findAll();
   }
 }
 

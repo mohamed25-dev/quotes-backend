@@ -1,11 +1,11 @@
-const makeRemoveAuthor = function ( dataAccess ) {
+const makeRemoveAuthor = function ( DataAccess, AppExceptions ) {
   return async function removeAuthor (authorId) {
-    let author = await dataAccess.findById(authorId);
+    let author = await DataAccess.findById(authorId);
     if (!author) {
-      throw new Error('Author not found'); 
+      throw new AppExceptions.NotFoundException('Author not found'); 
     }
     
-    return dataAccess.remove(authorId);
+    return DataAccess.remove(authorId);
   }
 }
 

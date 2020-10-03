@@ -1,14 +1,16 @@
-const AuthorsDb  = require('../../data-access/author/index')
+const AuthorsDataAccess  = require('../../data-access/author/index');
+const AppExceptions = require('../../common/errors/exceptions');
+
 const makeListAuthors = require('./list-authors');
 const makeAddAuthor = require('./add-author');
 const makeEditAuthor = require('./edit-author');
 const makeRemoveAuthor = require('./remove-author');
 
 
-const addAuthor    = makeAddAuthor(AuthorsDb);
-const listAuthors  = makeListAuthors(AuthorsDb);
-const editAuthor   = makeEditAuthor(AuthorsDb);
-const removeAuthor = makeRemoveAuthor(AuthorsDb);
+const addAuthor    = makeAddAuthor(AuthorsDataAccess, AppExceptions);
+const listAuthors  = makeListAuthors(AuthorsDataAccess);
+const editAuthor   = makeEditAuthor(AuthorsDataAccess, AppExceptions);
+const removeAuthor = makeRemoveAuthor(AuthorsDataAccess, AppExceptions);
 
 
 // addAuthor({
