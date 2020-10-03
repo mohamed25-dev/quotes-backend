@@ -1,27 +1,11 @@
-const makeGetRoles = function(listRoles) {
+const makeGetRoles = function (listRoles) {
   return async function getRoles(httpRequest) {
-    const headers = {
-      'Content-Type': 'application/json'
-    }
+    let authorId = httpRequest.params.authorId;
+    let roles = await listRoles(authorId);
 
-    try {
-      let authorId = httpRequest.params.authorId;
-      let roles = await listRoles(authorId);
-
-      return {
-        headers,
-        statusCode: 200,
-        body: roles
-      }
-
-    } catch (e) {
-      return {
-        headers,
-        statusCode: 500,
-        body: {
-          error: e.message
-        }
-      }
+    return {
+      statusCode: 200,
+      body: { roles }
     }
   }
 }
