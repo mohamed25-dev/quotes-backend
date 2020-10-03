@@ -2,12 +2,13 @@ const makeAuthor = require('../../entities/author/index');
 
 const makeAddAuthor = function ( DataAccess, AppExceptions ) {
   return async function addAuthor (authorInfo) {
-    let author = makeAuthor(authorInfo);
-    
-    let result = await DataAccess.findByFullName(author.getFullName());
-    if (result) {
-      throw new AppExceptions.InvalidInputException('Author with the same name already exist');
+
+    let user = await DataAccess.findByFullName(author.getFullName());
+    if (user) {
+      throw new AppExceptions.InvalidInputException('User with the same name already exist');
     }
+
+    user = makeAuthor(authorInfo);
 
     return DataAccess.insert({
       fullName: author.getFullName(),

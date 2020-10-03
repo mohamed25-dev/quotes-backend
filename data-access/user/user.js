@@ -1,8 +1,8 @@
-const makeUsersDb = function (UserDb, RoleDb, PermissionDb) {
+const makeUsersDb = function (UserDb, RoleDb, PermissionDb, Op) {
   async function findAll(options) {
     return UserDb.findAll(options);
   }
-  
+
   async function insert(user) {
     return UserDb.create(user);
   }
@@ -40,11 +40,11 @@ const makeUsersDb = function (UserDb, RoleDb, PermissionDb) {
         as: 'permissions',
         attributes: ['permissionId', 'permissionName'],
         through: {
-            attributes: []
+          attributes: []
         }
       }]
     }];
-    
+
     return UserDb.findOne({
       where: {
         username
@@ -53,13 +53,32 @@ const makeUsersDb = function (UserDb, RoleDb, PermissionDb) {
     });
   }
 
+  async function findByUsernameExceptId(userId, username) {
+    return UserDb.findOne({
+      where: {
+        username,
+        userId: {
+          [Op.ne]: userId
+        }
+      }
+    });
+
+  }
+
+  async function setRoles(roles) {
+    await UserDb.removeRoles(await UserDb.getRoles());
+    return UserDb.setRoles(roles);
+  }
+
   return Object.freeze({
     findAll,
     findById,
     insert,
     update,
     remove,
-    findByUsername
+    findByUsername,
+    findByUsernameExceptId,
+    setRoles
   });
 }
 

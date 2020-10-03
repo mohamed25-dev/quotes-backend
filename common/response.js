@@ -10,6 +10,7 @@ exports.success = (res, obj = null) => {
 };
 
 exports.error = (res, error) => {
+  console.log(error);
   if (typeof (error) === 'object' && error instanceof ApplicationException) {
     logger.warn(error);
     res.status(error.status).send({

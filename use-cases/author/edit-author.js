@@ -11,7 +11,7 @@ const makeEditAuthor = function ( DataAccess, AppExceptions ) {
         throw new AppExceptions.InvalidInputException('fullName should be more than three characters');
       }
 
-      let result = await DataAccess.findByFullNameExceptId(updatedAuthor.fullName, authorId);
+      let result = await DataAccess.findByFullNameExceptId(authorId, updatedAuthor.fullName);
       if (result) {
         throw new AppExceptions.InvalidInputException('Author with the same name already exist');
       }

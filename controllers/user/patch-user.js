@@ -1,5 +1,6 @@
 const makePatchUser = function (editUser) {
   return async function patchUser(httpRequest) {
+    
     let updatedUserInfo = httpRequest.body;
     let userId = httpRequest.params.userId;
 

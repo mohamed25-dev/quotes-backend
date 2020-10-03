@@ -37,7 +37,7 @@ const makeAuthorsDb = function (AuthorDb, Op) {
     });
   }
 
-  async function findByFullNameExceptId(fullName, authorId) {
+  async function findByFullNameExceptId(authorId, fullName) {
     return AuthorDb.findOne({
       where: {
         fullName,

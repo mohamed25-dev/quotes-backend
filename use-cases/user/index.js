@@ -1,7 +1,10 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const UsersDataAccess  = require('../../data-access/user/index');
+const UserDataAccess  = require('../../data-access/user/index');
+const RoleDataAccess  = require('../../data-access/role/index');
+
+const AppExceptions = require('../../common/errors/exceptions');
 
 const compare = function (password, hash) {
   return bcrypt.compare(password, hash);
@@ -33,11 +36,11 @@ const makeEditUser = require('./edit-user');
 const makeRemoveUser = require('./remove-user');
 const makeUserLogin = require('./user-login');
 
-const addUser    = makeAddUser(UsersDataAccess);
-const listUsers  = makeListUsers(UsersDataAccess);
-const editUser   = makeEditUser(UsersDataAccess);
-const removeUser = makeRemoveUser(UsersDataAccess);
-const userLogin  = makeUserLogin(UsersDataAccess, compare, generateAuthToken);
+const addUser    = makeAddUser(UserDataAccess, RoleDataAccess, AppExceptions);
+const listUsers  = makeListUsers(UserDataAccess);
+const editUser   = makeEditUser(UserDataAccess, RoleDataAccess, AppExceptions);
+const removeUser = makeRemoveUser(UserDataAccess);
+const userLogin  = makeUserLogin(UserDataAccess, compare, generateAuthToken);
 
 // addUser({
 //   fullName : 'Mohamed King',

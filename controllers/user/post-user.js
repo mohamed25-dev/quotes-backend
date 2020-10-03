@@ -1,10 +1,9 @@
 const makePostUser = function (addUser) {
   return async function postUser(httpRequest) {
-    let userInfo = httpRequest.body.user;
+    let userInfo = httpRequest.body;
     const user = await addUser(userInfo);
 
     return {
-      headers,
       statusCode: 201,
       body: user
     }
