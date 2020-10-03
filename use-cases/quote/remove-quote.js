@@ -1,11 +1,11 @@
-const makeRemoveQuote = function ( dataAccess ) {
+const makeRemoveQuote = function ( QuotesDataAccess, AppExceptions) {
   return async function removeQuote (quoteId) {
-    let quote = await dataAccess.findById(quoteId);
+    let quote = await QuotesDataAccess.findById(quoteId);
     if (!quote) {
-      throw new Error('Quote not found'); 
+      throw new AppExceptions.NotFoundException('Quote not found');
     }
     
-    return dataAccess.remove(quoteId);
+    return QuotesDataAccess.remove(quoteId);
   }
 }
 

@@ -1,4 +1,5 @@
 const makeAuthor = require('../../entities/author/index');
+
 const makeAddAuthor = function ( DataAccess, AppExceptions ) {
   return async function addAuthor (authorInfo) {
     let author = makeAuthor(authorInfo);

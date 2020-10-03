@@ -1,4 +1,4 @@
-const makeListQuotes = function ( quotesDb ) {
+const makeListQuotes = function ( QuotesDataAccess ) {
   return async function listQuotes (authorId = null) {
     let options = {};
 
@@ -8,7 +8,7 @@ const makeListQuotes = function ( quotesDb ) {
       }
     }
 
-    return quotesDb.findAll(options);
+    return QuotesDataAccess.findAll(options);
   }
 }
 

@@ -1,14 +1,19 @@
-const QuotesDb  = require('../../data-access/quote/index')
+const AppExceptions = require('../../common/errors/exceptions');
+
+const QuoteDataAccess  = require('../../data-access/quote/index');
+const AuthorDataAccess  = require('../../data-access/author/index');
+const CategoryDataAccess = require('../../data-access/category/index');
+
 const makeListQuotes = require('./list-quotes');
 const makeAddQuote = require('./add-quote');
 const makeEditQuote = require('./edit-quote');
 const makeRemoveQuote = require('./remove-quote');
 
 
-const addQuote    = makeAddQuote(QuotesDb);
-const listQuotes  = makeListQuotes(QuotesDb);
-const editQuote   = makeEditQuote(QuotesDb);
-const removeQuote = makeRemoveQuote(QuotesDb);
+const addQuote    = makeAddQuote(QuoteDataAccess, AuthorDataAccess, CategoryDataAccess, AppExceptions);
+const listQuotes  = makeListQuotes(QuoteDataAccess);
+const editQuote   = makeEditQuote(QuoteDataAccess, AuthorDataAccess, CategoryDataAccess, AppExceptions);
+const removeQuote = makeRemoveQuote(QuoteDataAccess);
 
 
 // addQuote({
