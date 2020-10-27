@@ -12,10 +12,8 @@ const makeEditUser = function (UserDataAccess, RoleDataAccess, AppExceptions) {
       if (duplicate) {
         throw new AppExceptions.NotFoundException('User withe the same Username already exist');
       }
-    }
-
-    //Validate the input
-    if (updatedUser.fullName) {
+  
+      //Validate the input
       if (updatedUser.fullName.length < 3) {
         throw new AppExceptions.InvalidInputException('fullName is not valid');
       }
