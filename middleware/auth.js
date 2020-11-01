@@ -1,5 +1,6 @@
 require('express-async-errors');
 const {setErrorResponse}  = require('../common/response');
+const AppExceptions = require('../common/errors/exceptions')
 const {ErrorHandler} = require('../helper/ErrorHandler');
 const jwt  = require('jsonwebtoken');
 const db   = require('../models');
@@ -15,7 +16,7 @@ const auth = async (req, res, next) => {
         const decoded = jwt.verify(token, 'strongKey');
         
         if(!decoded.userId) {
-            throw new ErrorHandler(401, 'Invalid Token ', 1014);
+            throw new AppExceptions.UnauthorizedException();
         }
         
         const user = await User.findOne({
@@ -28,7 +29,7 @@ const auth = async (req, res, next) => {
         });
 
         if (!user) {
-            throw new ErrorHandler(401, 'Invalid Token ', 1014);
+            throw new AppExceptions.UnauthorizedException();
         }
         
         req.token = token;

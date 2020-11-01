@@ -2,36 +2,36 @@ const express = require('express');
 const router  = new express.Router();
 const user    = require('../controllers/userController');
 const auth    = require('../middleware/auth');
-const {checkPermission} = require('../middleware/checkPermission');
+const { checkPermission } = require('../middleware/checkPermission');
+const { getUsers, postUser, patchUser, deleteUser, userLogin, resetPassword, updatePassword, getUser, getUserProfile } = require('../controllers/user/index');
+const makeCallback = require('../helper/express-callback');
 
 //Get all Users
-router.get('/users', auth, checkPermission('accounts'), user.list);
+router.get('/users', makeCallback(getUsers));
 
 //Create  User
-router.post('/users', user.create);
+router.post('/users', makeCallback(postUser));
 
 //Login User
-router.post('/users/login', user.login);
+router.post('/users/login', makeCallback(userLogin));
 
 //Get User Profile
-router.get('/users/me', auth, checkPermission('accounts'), user.profile);
-
-//Check user name availability
-router.get('/users/checkUsername/:username', user.checkUsername);
-
-//Reset Password 
-router.patch('/users/resetPassword/:userId', auth, checkPermission('accounts'), user.resetpassword);
-
-//Update Password 
-router.patch('/users/updatePassword/me', auth, checkPermission('accounts'), user.updatePassword);
+router.get('/users/me', auth, makeCallback(getUserProfile));
 
 //Update User
-router.patch('/users/:userId', auth, checkPermission('accounts'), user.update);
+router.patch('/users/:userId', makeCallback(patchUser));
 
 //Get User 
-router.get('/users/:userId', auth, checkPermission('accounts'), user.get);
+router.get('/users/:userId', auth, checkPermission('accounts'), makeCallback(getUser));
 
 //Delete User 
-router.delete('/users/:userId', auth, checkPermission('accounts'), user.delete);
+router.delete('/users/:userId', makeCallback(deleteUser));
+
+// Reset Password to default
+router.post('/users/password/:userId', auth, checkPermission('accounts'), makeCallback(resetPassword));
+
+// Update Password
+router.patch('/users/password/:userId', auth, checkPermission('accounts'), makeCallback(updatePassword));
+
 
 module.exports = router;

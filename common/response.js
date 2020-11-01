@@ -1,24 +1,27 @@
 const logger = require('../startup/logging');
+const ApplicationException = require('./errors/app_error');
 
-exports.setResponse = function setResponse(res, statusCode, message, data) {
-    result = {
-        success: true,
-        message: message.replace(/"/g, ''),
-        data: data
-    }
+exports.success = (res, obj = null) => {
+  if (obj) {
+    res.status(obj.code || 200).send(obj.body);
+  } else {
+    res.status(200).send();
+  }
+};
 
-    return res.status(statusCode).send(result);
-}
-
-exports.setErrorResponse = function setErrorResponse(res, statusCode, errorMessage, errorCode) {
-    logger.error(errorMessage);
-    console.log(errorCode);
-    result = {
-        success: false,
-        message: errorMessage.replace(/"/g, ''),
-        errorCode: errorCode,
-        data: []
-    }
-    
-    return res.status(statusCode).send(result);
-}
+exports.error = (res, error) => {
+  console.log(error);
+  if (typeof (error) === 'object' && error instanceof ApplicationException) {
+    logger.warn(error);
+    res.status(error.status).send({
+      code: error.code,
+      message: error.message,
+    })
+  } else {
+    logger.error(error);
+    res.status(error.code || 500).send({
+      code: error.code || 500,
+      message: error.message
+    });
+  }
+};
