@@ -6,7 +6,6 @@ const {
   userLogin,
   resetPassword,
   updatePassword,
-  getUser: getUserUseCase
 } = require('../../use-cases/user/index');
 
 const makeGetUsers = require('./get-users');
@@ -20,8 +19,8 @@ const makeResetPassword = require('./reset-password');
 const makeUpdatePassword = require('./update-password');
 
 const getUsers = makeGetUsers(listUsers);
-const getUser = makeGetUser(getUserUseCase);
-const getUserProfile = makeGetUserProfile(getUserUseCase);
+const getUser = makeGetUser(listUsers);
+const getUserProfile = makeGetUserProfile(listUsers);
 const postUser = makePostUser(addUser);
 const patchUser = makePatchUser(editUser);
 const deleteUser = makeDeleteUser(removeUser);

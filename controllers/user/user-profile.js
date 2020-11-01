@@ -1,8 +1,7 @@
-const makeGetUserProfile = function (getUserUsecase) {
+const makeGetUserProfile = function (listUsers) {
   return async function getUserProfile(httpRequest) {
     let userId = httpRequest.user.userId;
-    console.log(httpRequest.user, 'req user >>>>>>>>')
-    let users = await getUserUsecase(userId);
+    let users = await listUsers(userId);
 
     return {
       statusCode: 200,
