@@ -5,10 +5,13 @@ const {
   removeUser,
   userLogin,
   resetPassword,
-  updatePassword
+  updatePassword,
+  getUser: getUserUseCase
 } = require('../../use-cases/user/index');
 
 const makeGetUsers = require('./get-users');
+const makeGetUser = require('./get-user');
+const makeGetUserProfile = require('./user-profile');
 const makePostUser = require('./post-user');
 const makePatchUser = require('./patch-user');
 const makeDeleteUser = require('./delete-user');
@@ -17,13 +20,14 @@ const makeResetPassword = require('./reset-password');
 const makeUpdatePassword = require('./update-password');
 
 const getUsers = makeGetUsers(listUsers);
+const getUser = makeGetUser(getUserUseCase);
+const getUserProfile = makeGetUserProfile(getUserUseCase);
 const postUser = makePostUser(addUser);
 const patchUser = makePatchUser(editUser);
 const deleteUser = makeDeleteUser(removeUser);
 const login = makeUserLogin(userLogin);
 const resetPass = makeResetPassword(resetPassword);
 const updatePass = makeUpdatePassword(updatePassword);
-
 
 const userController = Object.freeze({
   getUsers,
@@ -32,7 +36,9 @@ const userController = Object.freeze({
   deleteUser,
   userLogin: login,
   resetPassword: resetPass,
-  updatePassword: updatePass
+  updatePassword: updatePass,
+  getUser,
+  getUserProfile
 });
 
 module.exports = userController;

@@ -3,7 +3,7 @@ const router  = new express.Router();
 const user    = require('../controllers/userController');
 const auth    = require('../middleware/auth');
 const { checkPermission } = require('../middleware/checkPermission');
-const { getUsers, postUser, patchUser, deleteUser, userLogin, resetPassword, updatePassword } = require('../controllers/user/index');
+const { getUsers, postUser, patchUser, deleteUser, userLogin, resetPassword, updatePassword, getUser, getUserProfile } = require('../controllers/user/index');
 const makeCallback = require('../helper/express-callback');
 
 //Get all Users
@@ -16,13 +16,13 @@ router.post('/users', makeCallback(postUser));
 router.post('/users/login', makeCallback(userLogin));
 
 //Get User Profile
-router.get('/users/me', auth, checkPermission('accounts'), user.profile);
+router.get('/users/me', auth, makeCallback(getUserProfile));
 
 //Update User
 router.patch('/users/:userId', makeCallback(patchUser));
 
 //Get User 
-router.get('/users/:userId', auth, checkPermission('accounts'), user.get);
+router.get('/users/:userId', auth, checkPermission('accounts'), makeCallback(getUser));
 
 //Delete User 
 router.delete('/users/:userId', makeCallback(deleteUser));

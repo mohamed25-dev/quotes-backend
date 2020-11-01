@@ -7,6 +7,7 @@ const makeExpressCallback = function (controller) {
       query: req.query,
       params: req.params,
       method: req.method,
+      user: req.user,
       headers: {
         'Content-Type': req.get('Content-Type')
       }

@@ -1,8 +1,8 @@
-const makeRemoveUser = function ( dataAccess ) {
+const makeRemoveUser = function ( dataAccess, AppExceptions) {
   return async function removeUser (userId) {
     let user = await dataAccess.findById(userId);
     if (!user) {
-      throw new Error('User not found'); 
+      throw new AppExceptions.NotFoundException('User not found');
     }
     
     return dataAccess.remove(userId);
