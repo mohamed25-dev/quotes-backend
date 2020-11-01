@@ -41,6 +41,8 @@ const makeEditUser = require('./edit-user');
 const makeRemoveUser = require('./remove-user');
 const makeUserLogin = require('./user-login');
 const makeResetPassword = require('./reset-password');
+const makeUpdatePassword = require('./update-password');
+
 
 const addUser    = makeAddUser(UserDataAccess, RoleDataAccess, AppExceptions);
 const listUsers  = makeListUsers(UserDataAccess);
@@ -48,6 +50,7 @@ const editUser   = makeEditUser(UserDataAccess, RoleDataAccess, AppExceptions);
 const removeUser = makeRemoveUser(UserDataAccess);
 const userLogin  = makeUserLogin(UserDataAccess, compare, generateAuthToken, AppExceptions);
 const resetPassword = makeResetPassword(UserDataAccess, hash, AppExceptions);
+const updatePassword = makeUpdatePassword(UserDataAccess, hash, AppExceptions);
 
 const userServices = Object.freeze({
   listUsers,
@@ -55,7 +58,8 @@ const userServices = Object.freeze({
   editUser,
   removeUser,
   userLogin,
-  resetPassword
+  resetPassword,
+  updatePassword
 });
 
 module.exports = userServices;

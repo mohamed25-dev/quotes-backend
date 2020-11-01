@@ -3,7 +3,7 @@ const router  = new express.Router();
 const user    = require('../controllers/userController');
 const auth    = require('../middleware/auth');
 const { checkPermission } = require('../middleware/checkPermission');
-const { getUsers, postUser, patchUser, deleteUser, userLogin, resetPassword } = require('../controllers/user/index');
+const { getUsers, postUser, patchUser, deleteUser, userLogin, resetPassword, updatePassword } = require('../controllers/user/index');
 const makeCallback = require('../helper/express-callback');
 
 //Get all Users
@@ -28,7 +28,10 @@ router.get('/users/:userId', auth, checkPermission('accounts'), user.get);
 router.delete('/users/:userId', makeCallback(deleteUser));
 
 // Reset Password to default
-router.put('/users/password/:userId', auth, checkPermission('accounts'), makeCallback(resetPassword));
+router.post('/users/password/:userId', auth, checkPermission('accounts'), makeCallback(resetPassword));
+
+// Update Password
+router.patch('/users/password/:userId', auth, checkPermission('accounts'), makeCallback(updatePassword));
 
 
 module.exports = router;
