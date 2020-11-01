@@ -1,5 +1,6 @@
-const {setErrorResponse} = require('../common/response');
+const {error} = require('../common/response');
 const logger = require('../startup/logging');
+const AppExceptions = require('../common/errors/exceptions');
 
 module.exports = function(err, req, res, next) {
     if(err.response) {
@@ -10,28 +11,24 @@ module.exports = function(err, req, res, next) {
     console.log(err);
     
     if(err.name == 'SequelizeValidationError') {
-        return setErrorResponse(res, 400, err.errors[0].message, err.errorCode);
+        return error(res, err);
     }
 
     if(err.name == 'SequelizeForeignKeyConstraintError') {
-        return setErrorResponse(res, 400, 'This Item can\'t be deleted', 1015);
+        return error(res, err);
     }
-
-    // if (err.code == 'ECONNREFUSED') {
-    //     return setErrorResponse(res, 500, 'Connection to an API failed');
-    // }
     														  																			
     if(err.name == 'SyntaxError') {
-        return setErrorResponse(res, 401, 'Invalid JWT', 1013);
+        return error(res, err);
     }
 
     if(err.statusCode == 404) {
-        return setErrorResponse(res, err.statusCode, err.message, 1003);
+        return error(res, err);
     }
 
     if(err.response) {
         if (err.response.data.message) {
-            return setErrorResponse(res, err.response.status, err.response.data.message, err.errorCode);
+            return error(res, err);
         }
     }
 
@@ -44,23 +41,16 @@ module.exports = function(err, req, res, next) {
             err.errorCode = 1011;
         }
 
-        return setErrorResponse(res, err.statusCode, err.message, err.errorCode);
+        return error(res, err.statusCode, err.message, err.errorCode);
     }
 
     if(err.message == 'jwt expired') {
-        err.errorCode = 1012;
-        return setErrorResponse(res, 401, 'JWT Expired', err.errorCode);
+        return error(res, new AppExceptions.UnauthorizedException());
     }
     
     if(err.name == 'JsonWebTokenError') {
-        let message = 'Invalid JWT';
-        err.errorCode = 1013;
-
-        if(err.message == 'jwt expired') {
-            message = 'JWT Expired';
-        }
-        return setErrorResponse(res, 401, message, err.errorCode);
+        return error(res, new AppExceptions.UnauthorizedException());
     }
 
-    return setErrorResponse(res, 500, 'Something went wrong, Please try again later', 1000);
+    return error(res, err);
 }

@@ -10,6 +10,11 @@ const compare = function (password, hash) {
   return bcrypt.compare(password, hash);
 }
 
+const hash = async function (password) {
+  return await bcrypt.hash(password, 8);
+}
+
+
 const generateAuthToken = async function (user) {
   let remaningHours = 24 - new Date().getHours(); // Remaingin Hours to the end of the day
   let permissions = [];
@@ -35,27 +40,22 @@ const makeAddUser = require('./add-user');
 const makeEditUser = require('./edit-user');
 const makeRemoveUser = require('./remove-user');
 const makeUserLogin = require('./user-login');
+const makeResetPassword = require('./reset-password');
 
 const addUser    = makeAddUser(UserDataAccess, RoleDataAccess, AppExceptions);
 const listUsers  = makeListUsers(UserDataAccess);
 const editUser   = makeEditUser(UserDataAccess, RoleDataAccess, AppExceptions);
 const removeUser = makeRemoveUser(UserDataAccess);
-const userLogin  = makeUserLogin(UserDataAccess, compare, generateAuthToken);
-
-// addUser({
-//   fullName : 'Mohamed King',
-//   image: 'my_image',
-//   isEnabled: true
-// }).then(data => console.log(data));
-
-// listUsers().then(data => console.log(data));
+const userLogin  = makeUserLogin(UserDataAccess, compare, generateAuthToken, AppExceptions);
+const resetPassword = makeResetPassword(UserDataAccess, hash, AppExceptions);
 
 const userServices = Object.freeze({
   listUsers,
   addUser,
   editUser,
   removeUser,
-  userLogin
+  userLogin,
+  resetPassword
 });
 
 module.exports = userServices;

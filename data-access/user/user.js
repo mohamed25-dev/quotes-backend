@@ -15,6 +15,16 @@ const makeUsersDb = function (UserDb, RoleDb, PermissionDb, Op) {
     });
   }
 
+  async function updatePassword(userId, password) {
+    return UserDb.update({
+      password
+    }, {
+      where: {
+        userId
+      }
+    });
+  }
+
   async function remove(userId) {
     return UserDb.destroy({
       where: {
@@ -78,7 +88,8 @@ const makeUsersDb = function (UserDb, RoleDb, PermissionDb, Op) {
     remove,
     findByUsername,
     findByUsernameExceptId,
-    setRoles
+    setRoles,
+    updatePassword
   });
 }
 
